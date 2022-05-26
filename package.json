@@ -23,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/uniquemozilla22/chat-application/issues"
   },
-  "homepage": "https://github.com/uniquemozilla22/chat-application#readme"
+  "homepage": "https://github.com/uniquemozilla22/chat-application#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0",
+    "mongoose": "^6.3.4"
+  }
 }
