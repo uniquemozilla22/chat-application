@@ -1,5 +1,7 @@
 # Chat Application
 
+<img src ="https://miro.medium.com/proxy/0*hU4zJiyVwWcM0L-w.png" alt="Stacks used">
+
 <p> This application is used for doing converstion with the friends and the data will be stored in a safe database in mongo</p>
 
 ## Stacks Used
