@@ -1,9 +1,9 @@
 import React from "react";
 import UserProfile from "./UserProfile.comp";
 
-const SidebarComponent = () => {
+const SidebarComponent = ({ modal }) => {
   return (
-    <aside>
+    <aside className={modal ? "sidebar-modal" : null}>
       <header>
         <input type="text" placeholder="search" />
       </header>

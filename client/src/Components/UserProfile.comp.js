@@ -10,7 +10,7 @@ const UserProfile = ({ online, image, username }) => {
       <div>
         <h2>Prénom Nom</h2>
         <h3>
-          <span class="status green"></span>
+          <span className="status green"></span>
           online
         </h3>
       </div>
@@ -24,7 +24,7 @@ const UserProfile = ({ online, image, username }) => {
       <div>
         <h2>Prénom Nom</h2>
         <h3>
-          <span class="status orange"></span>
+          <span className="status orange"></span>
           offline
         </h3>
       </div>
