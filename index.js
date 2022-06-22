@@ -1,21 +1,15 @@
 import express from "express";
 import cors from "cors";
+import buildClient from "./services/buildClient.js";
+import SocketServices from "./services/socket.js";
+import http from "http";
+import { Socket } from "socket.io";
 
 const app = express();
-
+const server = http.createServer(app);
 app.use(cors());
 
-if (process.env.NODE_ENV === "PRODUCTION") {
-  app.use(express.static(path.join("client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// All the Socket Server Socket Features are over here
+SocketServices(server);
 
-app.get("/", (req, res) =>
-  res.json({ success: true, message: "The server is running" })
-);
-
-const port = process.env.PORT || 8000;
-
-app.listen(port, () => console.log("server running" + port));
+server.listen(8000, () => console.log("Server is running"));
