@@ -12,6 +12,10 @@ if (process.env.NODE_ENV === "PRODUCTION") {
   });
 }
 
-app.get("/", (req, res) => res.send("<h1>Server Started</h1>"));
+app.get("/", (req, res) =>
+  res.json({ success: true, message: "The server is running" })
+);
 
-app.listen(process.env.PORT, () => console.log("server running"));
+const port = process.env.PORT || 8000;
+
+app.listen(port, () => console.log("server running" + port));
