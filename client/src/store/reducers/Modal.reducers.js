@@ -1,7 +1,7 @@
 import { LOGIN_MODAL } from "../Actions/Types";
 
 const initialState = {
-  login: false,
+  login: true,
 };
 
 const ModalReducers = (state = initialState, action) => {
