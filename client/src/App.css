@@ -29,6 +29,25 @@ aside{
 	vertical-align:top;
 }
 
+aside .users__profile{
+	display:flex;
+	justify-content:space-between;
+	padding:1rem ;
+	padding-bottom: 0;
+}
+aside .users__profile .actions__buttons{
+	display:flex;
+	gap:1rem;
+}
+
+
+aside .login__button{
+	color:#f8f8f8;
+}
+
+aside svg:hover{
+	opacity: 0.8;
+}
 
 main{
  width:80%;
