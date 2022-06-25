@@ -7,18 +7,16 @@ const HomeScreen = () => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div>
-      <div id="container">
-        <SidebarComponent />
-        <MessageBoxComponent openModal={() => setShowSidebar(true)} />
-        <Drawer
-          anchor={"left"}
-          open={showSidebar}
-          onClose={() => setShowSidebar(false)}
-        >
-          <SidebarComponent modal />
-        </Drawer>
-      </div>
+    <div id="container">
+      <SidebarComponent />
+      <MessageBoxComponent openModal={() => setShowSidebar(true)} />
+      <Drawer
+        anchor={"left"}
+        open={showSidebar}
+        onClose={() => setShowSidebar(false)}
+      >
+        <SidebarComponent modal />
+      </Drawer>
     </div>
   );
 };

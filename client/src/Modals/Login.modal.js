@@ -26,8 +26,8 @@ const LoginModal = () => {
             appId={
               "305475816603-uker4f6kv58hkem9p4oa9qrvmqgu0vc9.apps.googleusercontent.com"
             }
-            onLoginSuccess={() => console.log("success")}
-            onLoginFailure={() => console.log("error")}
+            onLoginSuccess={(user) => console.log(user)}
+            onLoginFailure={(err) => console.log(err)}
           >
             <Google sx={{ fontSize: "3rem" }} />
           </SocialMediaLoginServices>
@@ -35,8 +35,8 @@ const LoginModal = () => {
           <SocialMediaLoginServices
             provider="facebook"
             appId={"350729067044245"}
-            onLoginSuccess={() => console.log("success")}
-            onLoginFailure={() => console.log("error")}
+            onLoginSuccess={(user) => console.log(user)}
+            onLoginFailure={(err) => console.log(err)}
           >
             <FacebookOutlined sx={{ fontSize: "3rem" }} />
           </SocialMediaLoginServices>
