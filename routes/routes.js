@@ -1,7 +1,7 @@
+import authenticateRouter from "./Authenticate/authenticate.route.js";
+
 const routes = (app) => {
-  app.use("/", (req, res) =>
-    res.json({ status: 200, message: "Server is connected" })
-  );
+  app.use("/authenticate", authenticateRouter);
 };
 
 export default routes;
