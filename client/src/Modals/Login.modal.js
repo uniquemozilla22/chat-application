@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 import { FacebookOutlined, Google } from "@mui/icons-material";
 import { Modal } from "@mui/material";
+import { hasGrantedAllScopesGoogle } from "@react-oauth/google";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SocialMediaLoginServices from "../Services/SocialMediaLogin.services";
+import GoogleLoginServices from "../Services/GoogleLogin.services";
+import ErrorHandle from "../store/Actions/ErrorHandle/ErrorHandle.action";
+import LoginAction from "../store/Actions/Login/Login.action";
 import { hideLoginModal } from "../store/Actions/Modal/LoginModal.action";
 import { Heading, Paragraph } from "../UI/Headings";
 
@@ -12,6 +15,12 @@ const LoginModal = () => {
   const show = useSelector((state) => state.modal.login);
 
   const closeLoginModal = () => dispatch(hideLoginModal());
+
+  const LoginSuccess = (code, social) => {
+    dispatch(LoginAction(code, social));
+  };
+
+  const LoginError = (err) => dispatch(ErrorHandle(err));
   return (
     <Modal open={show} onClose={closeLoginModal}>
       <Box>
@@ -21,25 +30,9 @@ const LoginModal = () => {
           <Paragraph>Dont worry you information are safe with us .</Paragraph>
         </Content>
         <ButtonsContainer>
-          <SocialMediaLoginServices
-            provider="google"
-            appId={
-              "305475816603-uker4f6kv58hkem9p4oa9qrvmqgu0vc9.apps.googleusercontent.com"
-            }
-            onLoginSuccess={(user) => console.log(user)}
-            onLoginFailure={(err) => console.log(err)}
-          >
+          <GoogleLoginServices onSuccess={LoginSuccess} onError={LoginError}>
             <Google sx={{ fontSize: "3rem" }} />
-          </SocialMediaLoginServices>
-
-          <SocialMediaLoginServices
-            provider="facebook"
-            appId={"350729067044245"}
-            onLoginSuccess={(user) => console.log(user)}
-            onLoginFailure={(err) => console.log(err)}
-          >
-            <FacebookOutlined sx={{ fontSize: "3rem" }} />
-          </SocialMediaLoginServices>
+          </GoogleLoginServices>
         </ButtonsContainer>
       </Box>
     </Modal>

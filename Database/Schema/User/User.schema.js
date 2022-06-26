@@ -1,11 +1,11 @@
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const UserSchema = new Mongoose.Schema({
+const schema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: false,
   },
-  username: {
+  name: {
     type: String,
     required: true,
   },
@@ -13,8 +13,12 @@ const UserSchema = new Mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
 });
 
-const modalUser = mongoose.modal("users", UserSchema);
+const UserSchema = mongoose.model("user", schema);
 
-export default modalUser;
+export default UserSchema;
