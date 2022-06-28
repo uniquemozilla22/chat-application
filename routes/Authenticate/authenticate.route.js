@@ -28,7 +28,6 @@ const loginUser = async (data) => {
       return registerUser(data);
     }
   } catch (err) {
-    console.log({ ...err });
     throw new AppError(err.name ? err.name : "Login Error !", err.stack);
   }
 };
@@ -43,7 +42,6 @@ const registerUser = (data) => {
       return { user, message: "Successfully Registered" };
     }
   } catch (err) {
-    console.log({ ...err });
     throw new AppError("Registration Error !", err.stack);
   }
 };

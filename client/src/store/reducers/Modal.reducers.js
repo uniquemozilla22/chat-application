@@ -1,7 +1,15 @@
-import { LOGIN_MODAL } from "../Actions/Types";
+import {
+  LOGIN_MODAL,
+  SHOW_MESSAGE_MODAL,
+  HIDE_MESSAGE_MODAL,
+} from "../Actions/Types";
 
 const initialState = {
-  login: true,
+  login: false,
+  message: {
+    show: true,
+    data: [],
+  },
 };
 
 const ModalReducers = (state = initialState, action) => {
@@ -13,6 +21,20 @@ const ModalReducers = (state = initialState, action) => {
         ...state,
         login: payload,
       };
+    case SHOW_MESSAGE_MODAL: {
+      return {
+        ...state,
+        message: {
+          ...state.message,
+          show: true,
+          data: [...state.message.data, payload.data],
+        },
+      };
+    }
+
+    case HIDE_MESSAGE_MODAL: {
+      return { ...state, message: { ...state.message, show: false, data: [] } };
+    }
     default:
       return state;
   }

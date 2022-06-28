@@ -12,24 +12,19 @@ const LoginAction = (data, social) => {
       console.log("response", response);
       return data;
     } catch (error) {
-      console.log({ error });
-      ErrorHandle(error);
+      dispatch(ErrorHandle(error));
     }
   };
 };
 
 const request = async ({ access_token }, social) => {
-  try {
-    const userInfo = await axios.get(
-      "https://www.googleapis.com/oauth2/v3/userinfo",
-      {
-        headers: { Authorization: `Bearer ${access_token}` },
-      }
-    );
-    return axiosBase.post("authenticate/login", { social, ...userInfo.data });
-  } catch (error) {
-    ErrorHandle(error);
-  }
+  const userInfo = await axios.get(
+    "https://www.googleapis.com/oauth2/v3/userinfo",
+    {
+      headers: { Authorization: `Bearer ${access_token}` },
+    }
+  );
+  return axiosBase.post(LOGIN__ROUTE, { social, ...userInfo.data });
 };
 
 export default LoginAction;
