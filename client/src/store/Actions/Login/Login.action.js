@@ -1,30 +1,38 @@
 import axios from "axios";
-import axiosBase from "../../../axiosBase";
-import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
-import { hideLoading, showLoading } from "../Loader/Loader.action";
 import { LOGIN__ROUTE } from "../routes.constant";
+import Request from "../../../Services/Request.services.js";
+import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
+import { registerUser } from "../User/Register.action";
 
 const LoginAction = (data, social) => {
-  return async (dispatch, getState) => {
-    dispatch(showLoading());
-    try {
-      const res = await request(data, social);
-      dispatch(hideLoading());
-      return res.data;
-    } catch (error) {
-      dispatch(ErrorHandle(error));
-    }
+  return async (dispatch) => {
+    const { user } = await request(data, social, dispatch);
+    dispatch(
+      registerUser({
+        token: data.access_token,
+        email: user.email,
+        name: user.name,
+        image: user.image,
+      })
+    );
   };
 };
 
-const request = async ({ access_token }, social) => {
-  const userInfo = await axios.get(
-    "https://www.googleapis.com/oauth2/v3/userinfo",
-    {
-      headers: { Authorization: `Bearer ${access_token}` },
-    }
-  );
-  return axiosBase.post(LOGIN__ROUTE, { social, ...userInfo.data });
+const request = async ({ access_token }, social, dispatch) => {
+  try {
+    const userInfo = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }
+    );
+    return new Request(LOGIN__ROUTE, dispatch).post({
+      social,
+      ...userInfo.data,
+    });
+  } catch (error) {
+    dispatch(ErrorHandle(error));
+  }
 };
 
 export default LoginAction;

@@ -5,3 +5,5 @@ export const HIDE_MESSAGE_MODAL = "HIDE_MESSAGE_MODAL";
 
 export const SHOW_LOADER = "SHOW_LOADER";
 export const HIDE_LOADER = "HIDE_LOADER";
+
+export const REGISTER_USER = "REGISTER_USER";

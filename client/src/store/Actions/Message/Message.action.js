@@ -4,7 +4,7 @@ export const showSuccessMessage = (message) => {
   return {
     type: SHOW_MESSAGE_MODAL,
     payload: {
-      data: [{ type: "success", message: "Success Message" }],
+      data: { type: "success", message },
     },
   };
 };

@@ -23,7 +23,7 @@ const loginUser = async (data) => {
     const user = await UserSchema.findOne({ email, SocialID: sub });
 
     if (user) {
-      return { user, message: "Successfully Logged In" };
+      return { user, message: "Successfully! Logged In" };
     } else {
       return registerUser(data);
     }

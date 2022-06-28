@@ -16,9 +16,7 @@ const LoginModal = () => {
 
   const closeLoginModal = () => dispatch(hideLoginModal());
 
-  const LoginSuccess = (code, social) => {
-    dispatch(LoginAction(code, social));
-  };
+  const LoginSuccess = (code, social) => dispatch(LoginAction(code, social));
 
   const LoginError = (err) => dispatch(ErrorHandle(err));
   return (
@@ -62,5 +60,6 @@ const Content = styled.div({
   display: "flex",
   justifyContent: "center",
   flexDirection: "column",
+  margin: "1rem 0",
 });
 export default LoginModal;

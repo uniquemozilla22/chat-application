@@ -4,15 +4,18 @@ import UserProfile from "./UserProfile.comp";
 import { Login } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { ShowLoginModal } from "../store/Actions/Modal/LoginModal.action";
+import { showLoading } from "../store/Actions/Loader/Loader.action";
 
 const SidebarComponent = ({ modal, image, name }) => {
   const dispatch = useDispatch();
 
   const showLoginModal = () => dispatch(ShowLoginModal());
+
+  const show = () => dispatch(showLoading());
   return (
     <aside className={modal ? "sidebar-modal" : null}>
       <div className={"users__profile"}>
-        <div className={"user__profile__data"}>
+        <div className={"user__profile__data"} onClick={() => show()}>
           {image ? <Avatar src={image} /> : <Avatar>{name}</Avatar>}
         </div>
         <div className={"actions__buttons"}>
