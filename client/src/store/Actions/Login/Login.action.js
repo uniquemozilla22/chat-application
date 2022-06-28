@@ -1,16 +1,16 @@
 import axios from "axios";
 import axiosBase from "../../../axiosBase";
 import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
+import { hideLoading, showLoading } from "../Loader/Loader.action";
 import { LOGIN__ROUTE } from "../routes.constant";
 
 const LoginAction = (data, social) => {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     try {
-      console.log(data);
-      const response = await request(data, social);
-      console.log(data);
-      console.log("response", response);
-      return data;
+      const res = await request(data, social);
+      dispatch(hideLoading());
+      return res.data;
     } catch (error) {
       dispatch(ErrorHandle(error));
     }

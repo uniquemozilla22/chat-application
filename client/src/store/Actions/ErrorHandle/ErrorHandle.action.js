@@ -1,8 +1,9 @@
+import { hideLoading } from "../Loader/Loader.action";
 import { showErrorMessage } from "../Message/Message.action";
-const ErrorHandle = ({ code, message }) => {
+const ErrorHandle = ({ code, message, status }) => {
   return (dispatch) => {
-    console.log(code, message);
-    dispatch(showErrorMessage(message, code));
+    dispatch(hideLoading());
+    dispatch(showErrorMessage(message, code + " " + status));
   };
 };
 export default ErrorHandle;

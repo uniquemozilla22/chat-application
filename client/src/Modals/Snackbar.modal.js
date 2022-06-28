@@ -7,7 +7,6 @@ const SnackbarModal = () => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.modal.message);
   const [snackBar, setSnackBar] = useState(message.show);
-  //   const [data, setData] = useState(message.data);
 
   const handleClose = (index) => dispatch(hideMessage(index));
   return message.data.map((alert, index) => (
