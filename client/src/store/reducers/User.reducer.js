@@ -1,4 +1,4 @@
-import { REGISTER_USER } from "../Actions/Types";
+import { LOGOUT_USER, REGISTER_USER } from "../Actions/Types";
 
 const initialState = {
   token: null,
@@ -15,6 +15,16 @@ const UserReducer = (state = initialState, action) => {
       return {
         ...state,
         ...payload,
+      };
+    }
+
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        token: null,
+        email: null,
+        name: null,
+        image: null,
       };
     }
     default:
