@@ -3,6 +3,7 @@ import { LOGIN__ROUTE } from "../routes.constant";
 import Request from "../../../Services/Request.services.js";
 import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
 import { registerUser } from "../User/Register.action";
+import { hideLoginModal } from "../Modal/LoginModal.action";
 
 const LoginAction = (data, social) => {
   return async (dispatch) => {
@@ -15,6 +16,7 @@ const LoginAction = (data, social) => {
         image: user.image,
       })
     );
+    dispatch(hideLoginModal());
   };
 };
 
