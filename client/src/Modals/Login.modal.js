@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { FacebookOutlined, Google } from "@mui/icons-material";
+import {  Google } from "@mui/icons-material";
 import { Modal } from "@mui/material";
-import { hasGrantedAllScopesGoogle } from "@react-oauth/google";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GoogleLoginServices from "../Services/GoogleLogin.services";

@@ -4,7 +4,6 @@ import UserProfile from "./UserProfile.comp";
 import { Login, Logout } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { ShowLoginModal } from "../store/Actions/Modal/LoginModal.action";
-import { showLoading } from "../store/Actions/Loader/Loader.action";
 import LogoutAction from "../store/Actions/Login/Logout.action";
 
 const SidebarComponent = ({ modal, user, authenticated }) => {
@@ -15,15 +14,15 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
       {authenticated ? (
         <div className={"users__profile"}>
           <div className={"user__profile__data"}>
-            {user.image ? (
               <Tooltip title={user.name}>
-                <Avatar srcSet={user.image} />
+            {
+              user.image ? 
+                <Avatar src={user.image} />:<Avatar>{user.name}</Avatar>
+            }
+
               </Tooltip>
-            ) : (
-              <Tooltip title={user.name}>
-                <Avatar>{user.name}</Avatar>
-              </Tooltip>
-            )}
+
+          
           </div>
           <div className={"actions__buttons"}>
             <Tooltip title={"Logout User"}>
