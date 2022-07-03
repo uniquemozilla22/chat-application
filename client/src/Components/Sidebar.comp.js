@@ -10,15 +10,14 @@ import LogoutAction from "../store/Actions/Login/Logout.action";
 const SidebarComponent = ({ modal, user, authenticated }) => {
   const dispatch = useDispatch();
   const showLoginModal = () => dispatch(ShowLoginModal());
-  const show = () => dispatch(showLoading());
   return (
     <aside className={modal ? "sidebar-modal" : null}>
       {authenticated ? (
         <div className={"users__profile"}>
-          <div className={"user__profile__data"} onClick={() => show()}>
+          <div className={"user__profile__data"}>
             {user.image ? (
               <Tooltip title={user.name}>
-                <Avatar src={user.image} />
+                <Avatar srcSet={user.image} />
               </Tooltip>
             ) : (
               <Tooltip title={user.name}>
