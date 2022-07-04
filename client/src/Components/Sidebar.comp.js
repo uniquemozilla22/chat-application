@@ -54,7 +54,10 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
        {user.name ?<>
        <UserProfile online />
         <UserProfile />
-        </> : <ProfileMessageSkeleton/>}
+        </> :
+        <>
+        <ProfileMessageSkeleton count={10}/>
+        </>}
       </ul>
     </aside>
   );
