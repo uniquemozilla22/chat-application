@@ -5,6 +5,7 @@ import { Login, Logout } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { ShowLoginModal } from "../store/Actions/Modal/LoginModal.action";
 import LogoutAction from "../store/Actions/Login/Logout.action";
+import { ProfileMessageSkeleton } from "../UI/Skeletons";
 
 const SidebarComponent = ({ modal, user, authenticated }) => {
   const dispatch = useDispatch();
@@ -50,8 +51,10 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
         <input type="text" placeholder="search" />
       </header>
       <ul>
-        <UserProfile online />
+       {user.name ?<>
+       <UserProfile online />
         <UserProfile />
+        </> : <ProfileMessageSkeleton/>}
       </ul>
     </aside>
   );
