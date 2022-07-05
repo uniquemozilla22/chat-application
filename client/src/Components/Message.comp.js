@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-const MessageBoxComponent = ({ openModal }) => {
+const MessageBoxComponent = ({ openModal,sendMessage }) => {
+
+  const [message, setMessage ]= useState("")
   return (
     <main>
       <header>
@@ -95,7 +97,9 @@ const MessageBoxComponent = ({ openModal }) => {
         </li>
       </ul>
       <footer>
-        <textarea placeholder="Type your message"></textarea>
+        <form onSubmit={()=>sendMessage(message)}>
+        <textarea placeholder="Type your message" onChange={(e) => setMessage(e.target.value)}></textarea>
+
         <div className="text-options">
           <div className="options">
             <img
@@ -109,6 +113,8 @@ const MessageBoxComponent = ({ openModal }) => {
           </div>
           <input type="submit" value={"Send"}></input>
         </div>
+        </form>
+        
       </footer>
     </main>
   );
