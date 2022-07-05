@@ -7,7 +7,9 @@ const UserRouter =  Express.Router()
 UserRouter.post('/find',async (req, res)=>{
 
     const {query} = req.body
-    const users = await UserSchema.find({$or:[{email:{ $regex: '.*' + query.toLowerCase() + '.*' }},{name:{ $regex: '.*' + query.toLowerCase() + '.*' }}]})
+    const users = await UserSchema.find({
+         $or: [ {email: { $regex: '.*' + query + '.*' }}] 
+        })
     res.status(200).send(users)
 })
 

@@ -9,13 +9,15 @@ const HomeScreen = () => {
   const user = useSelector((state) => state.user);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const socket = new Socket()
+  // const socket = new Socket()
 
-  const sendMessage = (message) => socket.sendMessage(message)
+  const sendMessage = (message) => {
+    // socket.sendMessage(message)
+  }
 
-  const Mesage = () => console.log(socket.getMessage())
+  // const Mesage = () => console.log(socket.getMessage())
 
-  console.log(socket.getMessage())
+  // console.log(socket.getMessage())
 
   return (
     <div id="container">

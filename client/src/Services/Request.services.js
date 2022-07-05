@@ -9,7 +9,6 @@ class Request {
     this.dispatch = dispatch;
     dispatch({ type: SHOW_LOADER });
   }
-
   async post(data) {
     try {
       const response = await axiosBase.post(this.link, { ...data });
