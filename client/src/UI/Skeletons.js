@@ -5,9 +5,9 @@ import React from 'react'
 export const ProfileMessageSkeleton = ({count}) =>{
 
     let profileloop = []
-     for(let i= 0; i<=count ;i++){
+     for(let i= 0; i<count ;i++){
 
-     profileloop[i] = <ProfileWrapper>
+     profileloop[i] = <ProfileWrapper key={i}>
         <Skeleton variant="circular" width={50} height={50} />
         <Skeleton variant="rectangular" height={60} width={"100%"} />
     </ProfileWrapper>

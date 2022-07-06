@@ -28,7 +28,7 @@ const HomeScreen = () => {
         open={showSidebar}
         onClose={() => setShowSidebar(false)}
       >
-        <SidebarComponent modal user={user} />
+        <SidebarComponent modal user={user} authenticated={user.token ? true : false} />
       </Drawer>
     </div>
   );
