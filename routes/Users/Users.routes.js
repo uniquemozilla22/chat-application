@@ -13,6 +13,4 @@ UserRouter.post('/find',async (req, res)=>{
     res.status(200).send(users)
 })
 
-
-
 export default UserRouter

@@ -8,7 +8,6 @@ const GetUsers = (query)=>{
         try{
             console.log(query)
             const response = await new Request(GET_USERS_LIST, dispatch).post({query});
-            console.log(response)
             return response
         }
         catch(error){

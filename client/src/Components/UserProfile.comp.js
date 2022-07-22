@@ -12,7 +12,6 @@ const UserProfile = ({ online, image, username,search, email }) => {
       <div>
         <h2>{username||"Prénom Nom"}</h2>
         <Headingthree>
-          <span className="status green"></span>
           {email||online}
         </Headingthree>
       </div>
@@ -26,7 +25,6 @@ const UserProfile = ({ online, image, username,search, email }) => {
       <div>
         <h2>{username|| "Prénom Nom"}</h2>
         <Headingthree>
-          <span className="status orange"></span>
           {email||online}
         </Headingthree>
       </div>
@@ -43,7 +41,9 @@ const Listing= styled.li({
 
 const Headingthree = styled.h3({
   display:"flex",
-  gap:"0.5rem"
+  gap:"0.5rem",
+  fontSize:"1rem",
+  fontWeight:"300"
 })
 
 export default UserProfile;

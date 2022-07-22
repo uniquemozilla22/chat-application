@@ -1,7 +1,7 @@
-import { Avatar, Tooltip } from "@mui/material";
-import React, { useState } from "react";
+import { Avatar, Dialog, DialogContent, DialogTitle, Tooltip } from "@mui/material";
+import React, { useCallback, useState } from "react";
 import UserProfile from "./UserProfile.comp";
-import { Login, Logout, SearchOutlined } from "@mui/icons-material";
+import { Login, Logout, SearchOutlined, TurnedIn } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { ShowLoginModal } from "../store/Actions/Modal/LoginModal.action";
 import LogoutAction from "../store/Actions/Login/Logout.action";
@@ -14,29 +14,26 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
   const dispatch = useDispatch();
   const showLoginModal = () => dispatch(ShowLoginModal());
   const [showSearch, setShowSearch] = useState(false)
-  const [Loading, setLoading]= useState(false)
   const [users, setUsers] =  useState(null)
+  const [searchValue, setSearchValue] = useState(null)
 
   const [chatroom, setChatroom] = useState(null)
 
   const searchUser = async (e) => {
-    setLoading(true)
     e.preventDefault()
-      const data = await  dispatch(GetUsers(e.target.value))
-      console.log(data)
+      const data = await  dispatch(GetUsers(searchValue))
       setUsers([...data])
-      setLoading(false)
   }
 
 
-  const showSearchSubmit  = (e) =>{
-    if(showSearch) return;
-    if(e.target.length===0){
+  const onChangeSearchValue  = useCallback((e) =>{
+    setSearchValue(e.target.value)
+    if(e.target.value.length === 0){
       setShowSearch(false)
     }
-    console.log(e.target.value.length)
+    if(showSearch) return
     setShowSearch(true)
-  }
+  },[showSearch])
 
   return (
     <aside className={modal ? "sidebar-modal" : null}>
@@ -44,7 +41,7 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
         <div className={"users__profile"}>
           <div className={"user__profile__data"}>
               <Tooltip title={user.name}>
-            { user?.image ? <Avatar src={user?.image} />:<Avatar>{user?.name}</Avatar> }
+            { user && (user.image ? <Avatar src={user.image} loading="lazy"/>:<Avatar>{user.name}</Avatar>) }
               </Tooltip>
           </div>
           <div className={"actions__buttons"}>
@@ -71,12 +68,17 @@ const SidebarComponent = ({ modal, user, authenticated }) => {
       )}
       <Header>
         <Search onSubmit={searchUser}>
-          <input type="text" placeholder="Email Address" onChange={showSearchSubmit}/>
+          <input type="text" placeholder="Email..." onChange={onChangeSearchValue}/>
           {showSearch && <Submit type="submit"><SearchOutlined/></Submit>}
         </Search>
-        {users && <Listcontainer>
-          {users.map((u,index)=><UserProfile key={index} online search email={u.email} image={u.image} username={u.name}/>)}
-        </Listcontainer>}
+        <Dialog  onClose={()=>setUsers(null)} open={users? true: false}>
+          {users && users.length !== 0  ? <> <DialogTitle> {users.length} users found</DialogTitle>
+          <DialogContent>
+          <Listcontainer>
+          {users?.map((u,index)=><UserProfile key={index} online search email={u.email} image={u.image} username={u.name}/>)}
+        </Listcontainer>
+          </DialogContent> </>:<DialogTitle> No Result Found</DialogTitle>}
+        </Dialog>
       </Header>
       <ul>
        {chatroom ?<>
@@ -104,14 +106,12 @@ const Search = styled.form({
 })
 
 const Listcontainer  =  styled.ul({
-  position:"absolute",
-  left:0,
-  right:0,
   backgroundColor:"#ffffff50",
   listStyle:"none",
   maxHeight:'100% !important',
   transform: "translateY(0)",
     transition: "all .3s ease-out",
+    padding:"0",
    
   ":hover":{
     cursor:"pointer"
@@ -133,9 +133,6 @@ const Listcontainer  =  styled.ul({
 })
 
 
-const Loader = styled.ul({
-  display:''
-})
 const Submit = styled.button({
   backgroundColor: '#5e616a',
   color:"#f8f8f8",
