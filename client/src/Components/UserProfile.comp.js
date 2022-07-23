@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Avatar } from "@mui/material";
 import React from "react";
 
-const UserProfile = ({ online, image, username,search, email }) => {
+const UserProfile = ({ online, image, username, email }) => {
   return online ? (
     <Listing>
       <Avatar
@@ -10,7 +10,7 @@ const UserProfile = ({ online, image, username,search, email }) => {
         alt={email || ""}
       />
       <div>
-        <h2>{username||"Prénom Nom"}</h2>
+        <Name>{username||"Prénom Nom"}</Name>
         <Headingthree>
           {email||online}
         </Headingthree>
@@ -23,7 +23,7 @@ const UserProfile = ({ online, image, username,search, email }) => {
         alt={email||""}
       />
       <div>
-        <h2>{username|| "Prénom Nom"}</h2>
+        <Name>{username|| "Prénom Nom"}</Name>
         <Headingthree>
           {email||online}
         </Headingthree>
@@ -36,7 +36,17 @@ const UserProfile = ({ online, image, username,search, email }) => {
 const Listing= styled.li({
   display:"flex",
   gap:"1rem",
-  margin:"1rem"
+  margin:"1rem",
+  opacity:"0.8",
+  transition:"opacity 0.2s ease-in",
+  ":hover":{
+   opacity:"1"
+  }
+})
+
+const Name = styled.h2({
+  fontSize:"1rem",
+  fontWeight:"900"
 })
 
 const Headingthree = styled.h3({

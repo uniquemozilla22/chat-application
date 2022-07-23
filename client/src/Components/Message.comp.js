@@ -1,8 +1,11 @@
+import styled from "@emotion/styled";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const MessageBoxComponent = ({ openModal,sendMessage }) => {
-
-  const [message, setMessage ]= useState("")
+const MessageBoxComponent = ({ openModal , sendMessage , messages}) => {
+  const [messageInput, setMessageInput ]= useState("")
+  console.log(messages)
+  const SocialID =  useSelector(state=> state.user.SocialID)
   return (
     <main>
       <header>
@@ -17,88 +20,37 @@ const MessageBoxComponent = ({ openModal,sendMessage }) => {
         </div>
       </header>
       <ul id="chat">
-        <li className="you">
+        {messages.map(({message, by, time})=> by !== SocialID ?<li className="you">
           <div className="entete">
-            <h2>Vincent</h2>
+            <h2>{by}</h2>
             <div className="status-line">
               <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
+              <h3>{time}</h3>
             </div>
           </div>
 
           <div className="message">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor.
+           {message}
           </div>
         </li>
-        <li className="me">
-          <div className="entete">
-            <h2>Vincent</h2>
-            <div className="status-line">
-              <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
-            </div>
+        :<li className="me">
+        <div className="entete">
+          <h2>{by}</h2>
+          <div className="status-line">
+            <span className="status green"></span>
+            <h3>{time}</h3>
           </div>
+        </div>
 
-          <div className="message">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor.
-          </div>
-        </li>
-        <li className="me">
-          <div className="entete">
-            <h2>Vincent</h2>
-            <div className="status-line">
-              <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
-            </div>
-          </div>
-
-          <div className="message">OK</div>
-        </li>
-        <li className="you">
-          <div className="entete">
-            <h2>Vincent</h2>
-            <div className="status-line">
-              <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
-            </div>
-          </div>
-
-          <div className="message">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor.
-          </div>
-        </li>
-        <li className="me">
-          <div className="entete">
-            <h2>Vincent</h2>
-            <div className="status-line">
-              <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
-            </div>
-          </div>
-
-          <div className="message">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor.
-          </div>
-        </li>
-        <li className="me">
-          <div className="entete">
-            <h2>Vincent</h2>
-            <div className="status-line">
-              <span className="status green"></span>
-              <h3>10:12AM, Today</h3>
-            </div>
-          </div>
-
-          <div className="message">OK</div>
-        </li>
+        <div className="message">
+          {message}
+        </div>
+      </li>
+        )}
       </ul>
       <footer>
-        <form onSubmit={()=>sendMessage(message)}>
-        <textarea placeholder="Type your message" onChange={(e) => setMessage(e.target.value)}></textarea>
+        <form onSubmit={(e)=>{e.preventDefault();sendMessage(messageInput)}}>
+        <Input placeholder="Type your message" onChange={(e) => setMessageInput(e.target.value)}></Input>
 
         <div className="text-options">
           <div className="options">
@@ -114,10 +66,14 @@ const MessageBoxComponent = ({ openModal,sendMessage }) => {
           <input type="submit" value={"Send"}></input>
         </div>
         </form>
-        
       </footer>
     </main>
   );
 };
 
+
+const Input =  styled.input({
+  width:"100%",
+  padding:"1rem"
+})
 export default MessageBoxComponent;

@@ -8,6 +8,7 @@ export const registerUser = (user) => {
       email: user.email,
       name: user.name,
       image: user.image,
+      SocialID: user.SocialID
     },
   };
 };

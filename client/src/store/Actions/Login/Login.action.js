@@ -4,16 +4,15 @@ import Request from "../../../Services/Request.services.js";
 import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
 import { registerUser } from "../User/Register.action";
 import { hideLoginModal } from "../Modal/LoginModal.action";
+import { showSuccessMessage } from "../Message/Message.action";
 
 const LoginAction = (data, social) => {
   return async (dispatch) => {
-    const { user } = await request(data, social, dispatch);
+    const {user} = await request(data, social, dispatch);
     dispatch(
       registerUser({
         token: data.access_token,
-        email: user.email,
-        name: user.name,
-        image: user.image,
+        ...user
       })
     );
     dispatch(hideLoginModal());

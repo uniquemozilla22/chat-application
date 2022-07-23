@@ -6,14 +6,11 @@ import { GET_USERS_LIST } from "../routes.constant";
 const GetUsers = (query)=>{
     return async (dispatch)=>{
         try{
-            console.log(query)
-            const response = await new Request(GET_USERS_LIST, dispatch).post({query});
-            return response
+            return await new Request(GET_USERS_LIST, dispatch).post({query})
         }
         catch(error){
             dispatch(ErrorHandle(error));
         }
-
     }
 }
 

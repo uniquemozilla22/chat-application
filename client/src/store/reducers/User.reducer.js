@@ -5,6 +5,7 @@ const initialState = {
   email: null,
   name: null,
   image: null,
+  SocialID:null
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -14,7 +15,7 @@ const UserReducer = (state = initialState, action) => {
     case REGISTER_USER: {
       return {
         ...state,
-        ...payload,
+      ...payload,
       };
     }
 
@@ -25,6 +26,7 @@ const UserReducer = (state = initialState, action) => {
         email: null,
         name: null,
         image: null,
+        SocialID:null,
       };
     }
     default:
