@@ -17,6 +17,10 @@ authenticate.post("/login", async (req, res) => {
   }
 });
 
+
+
+authenticate.post
+
 const loginUser = async (data) => {
   try {
     const { email, sub } = data;

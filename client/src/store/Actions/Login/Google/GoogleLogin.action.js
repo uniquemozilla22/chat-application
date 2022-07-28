@@ -1,4 +1,5 @@
-import axios from "axios";
+
+
 import { LOGIN__ROUTE } from "../routes.constant";
 import Request from "../../../Services/Request.services.js";
 import ErrorHandle from "../ErrorHandle/ErrorHandle.action";
@@ -8,8 +9,7 @@ import { showSuccessMessage } from "../Message/Message.action";
 
 const LoginAction = (data) => {
   return async (dispatch) => {
-    try{
-      const {user} = await request(data,dispatch);
+    const {user} = await request(data, dispatch);
     dispatch(
       registerUser({
         token: data.access_token,
@@ -17,15 +17,17 @@ const LoginAction = (data) => {
       })
     );
     dispatch(hideLoginModal());
-    }
-    catch (error) {
-      dispatch(ErrorHandle(error));
-      return 
-    }
-    
   };
 };
 
-const request =  (data, dispatch) => new Request(LOGIN__ROUTE, dispatch).post({data});
+const request = async ( data, dispatch) => {
+  try {
+    return new Request(LOGIN__ROUTE, dispatch).post({
+      data
+    });
+  } catch (error) {
+    dispatch(ErrorHandle(error));
+  }
+};
 
 export default LoginAction;
